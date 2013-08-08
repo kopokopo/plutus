@@ -1,12 +1,12 @@
 # The Revenue class is an account type used to represents increases in owners equity.
 #
 # === Normal Balance
-# The normal balance on Revenue accounts is a *Credit*. 
+# The normal balance on Revenue plutus_accounts is a *Credit*.
 #
 # @see http://en.wikipedia.org/wiki/Revenue Revenue
 #
 # @author Michael Bulat
-class Revenue < Account
+class Revenue < PlutusAccount
   
   # The credit balance for the account.
   # 
@@ -40,7 +40,7 @@ class Revenue < Account
   
   # The balance of the account.
   #
-  # Revenue accounts have normal credit balances, so the debits are subtracted from the credits
+  # Revenue plutus_accounts have normal credit balances, so the debits are subtracted from the credits
   # unless this is a contra account, in which credits are subtracted from debits
   # 
   # @example
@@ -57,9 +57,9 @@ class Revenue < Account
   end
   
   # This class method is used to return
-  # the balance of all Revenue accounts.
+  # the balance of all Revenue plutus_accounts.
   #
-  # Contra accounts are automatically subtracted from the balance.
+  # Contra plutus_accounts are automatically subtracted from the balance.
   #
   # @example
   #   >> Revenue.balance

@@ -11,7 +11,7 @@ describe Expense do
     expense.balance.should be_kind_of(BigDecimal)
   end
   
-  it "should report a balance for the class of accounts" do
+  it "should report a balance for the class of plutus_accounts" do
     Expense.should respond_to(:balance)
     Expense.balance.should be_kind_of(BigDecimal)
   end

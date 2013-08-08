@@ -1,12 +1,12 @@
 # The Liability class is an account type used to represents debts owed to outsiders.
 #
 # === Normal Balance
-# The normal balance on Liability accounts is a *Credit*. 
+# The normal balance on Liability plutus_accounts is a *Credit*.
 #
 # @see http://en.wikipedia.org/wiki/Liability_(financial_accounting) Liability
 #
 # @author Michael Bulat
-class Liability < Account
+class Liability < PlutusAccount
   
   # The credit balance for the account.
   # 
@@ -40,7 +40,7 @@ class Liability < Account
   
   # The balance of the account.
   #
-  # Liability accounts have normal credit balances, so the debits are subtracted from the credits
+  # Liability plutus_accounts have normal credit balances, so the debits are subtracted from the credits
   # unless this is a contra account, in which credits are subtracted from debits
   # 
   # @example
@@ -56,7 +56,7 @@ class Liability < Account
     end    
   end
   
-  # Balance of all Liability accounts
+  # Balance of all Liability plutus_accounts
   #
   # @example
   #   >> Liability.balance

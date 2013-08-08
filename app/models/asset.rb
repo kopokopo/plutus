@@ -1,12 +1,12 @@
 # The Asset class is an account type used to represents resources owned by the business entity. 
 #
 # === Normal Balance
-# The normal balance on Asset accounts is a *Debit*. 
+# The normal balance on Asset plutus_accounts is a *Debit*.
 #
 # @see http://en.wikipedia.org/wiki/Asset Assets
 #
 # @author Michael Bulat
-class Asset < Account
+class Asset < PlutusAccount
   
   # The credit balance for the account.
   # 
@@ -57,9 +57,9 @@ class Asset < Account
   end  
   
   # This class method is used to return
-  # the balance of all Asset accounts.
+  # the balance of all Asset plutus_accounts.
   #
-  # Contra accounts are automatically subtracted from the balance.
+  # Contra plutus_accounts are automatically subtracted from the balance.
   #
   # @example
   #   >> Asset.balance

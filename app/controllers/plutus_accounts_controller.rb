@@ -9,15 +9,15 @@
 # controller will inherit.
 # 
 # @author Michael Bulat
-class AccountsController < ApplicationController
+class PlutusAccountsController < ApplicationController
   unloadable
   
   # @example
-  #   GET /accounts
-  #   GET /accounts.xml
-  #   GET /accounts.json
+  #   GET /plutus_accounts
+  #   GET /plutus_accounts.xml
+  #   GET /plutus_accounts.json
   def index
-    @accounts = Account.all
+    @accounts = PlutusAccount.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,11 +27,11 @@ class AccountsController < ApplicationController
   end
   
   # @example
-  #   GET /accounts/1
-  #   GET /accounts/1.xml
-  #   GET /accounts/1.json
+  #   GET /plutus_accounts/1
+  #   GET /plutus_accounts/1.xml
+  #   GET /plutus_accounts/1.json
   def show
-    @account = Account.find(params[:id])
+    @account = PlutusAccount.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

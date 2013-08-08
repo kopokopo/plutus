@@ -1,4 +1,4 @@
-Factory.define :account do |account|
+Factory.define :plutus_account do |account|
   account.name 'factory name'
   account.contra false
 end

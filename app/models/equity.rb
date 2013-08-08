@@ -1,12 +1,12 @@
 # The Equity class is an account type used to represents owners rights to the assets.
 #
 # === Normal Balance
-# The normal balance on Equity accounts is a *Credit*. 
+# The normal balance on Equity plutus_accounts is a *Credit*.
 #
 # @see http://en.wikipedia.org/wiki/Equity_(finance) Equity
 #
 # @author Michael Bulat
-class Equity < Account
+class Equity < PlutusAccount
   
   # The credit balance for the account.
   # 
@@ -41,7 +41,7 @@ class Equity < Account
   
   # The balance of the account.
   #
-  # Equity accounts have normal credit balances, so the debits are subtracted from the credits
+  # Equity plutus_accounts have normal credit balances, so the debits are subtracted from the credits
   # unless this is a contra account, in which credits are subtracted from debits
   # 
   # @example
@@ -58,9 +58,9 @@ class Equity < Account
   end
   
   # This class method is used to return
-  # the balance of all Equity accounts.
+  # the balance of all Equity plutus_accounts.
   #
-  # Contra accounts are automatically subtracted from the balance.
+  # Contra plutus_accounts are automatically subtracted from the balance.
   #
   # @example
   #   >> Equity.balance

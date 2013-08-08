@@ -1,7 +1,7 @@
 #
 # == Overview:
 #
-# The Account class represents accounts in the system. Each account must be subclassed as one of the following types:
+# The Account class represents plutus_accounts in the system. Each account must be subclassed as one of the following types:
 #
 #   TYPE        | NORMAL BALANCE    | DESCRIPTION
 #   --------------------------------------------------------------------------
@@ -17,7 +17,7 @@
 #
 #   Equity.create(:name => "Drawing", contra => true)
 #
-# At all times the balance of all accounts should conform to the "accounting equation"
+# At all times the balance of all plutus_accounts should conform to the "accounting equation"
 #   Assets = Liabilties + Owner's Equity
 #
 # Each sublclass account acts as it's own ledger. See the individual subclasses for a 
@@ -31,23 +31,23 @@
 # @see http://en.wikipedia.org/wiki/Debits_and_credits Debits, Credits, and Contra Accounts
 # 
 # @author Michael Bulat
-class Account < ActiveRecord::Base
+class PlutusAccount < ActiveRecord::Base
   
   validates_presence_of :type, :name
   
   has_many :credit_transactions,  :class_name => "Transaction", :foreign_key => "credit_account_id"
   has_many :debit_transactions,  :class_name => "Transaction", :foreign_key => "debit_account_id"      
   
-  # The trial balance of all accounts in the system. This should always equal zero, 
+  # The trial balance of all plutus_accounts in the system. This should always equal zero,
   # otherwise there is an error in the system.
   # 
   # @example
   #   >> Account.trial_balance.to_i
   #   => 0
   #
-  # @return [BigDecimal] The decimal value balance of all accounts
+  # @return [BigDecimal] The decimal value balance of all plutus_accounts
   def self.trial_balance
-    unless self.new.class == Account
+    unless self.new.class == PlutusAccount
       raise(NoMethodError, "undefined method 'trial_balance'")
     else
       Asset.balance - (Liability.balance + Equity.balance + Revenue.balance - Expense.balance)

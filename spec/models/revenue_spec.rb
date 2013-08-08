@@ -11,7 +11,7 @@ describe Revenue do
     revenue.balance.should be_kind_of(BigDecimal)
   end
   
-  it "should report a balance for the class of accounts" do
+  it "should report a balance for the class of plutus_accounts" do
     Revenue.should respond_to(:balance)
     Revenue.balance.should be_kind_of(BigDecimal)
   end

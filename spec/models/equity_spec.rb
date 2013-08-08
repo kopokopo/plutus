@@ -11,7 +11,7 @@ describe Equity do
     equity.balance.should be_kind_of(BigDecimal)
   end
   
-  it "should report a balance for the class of accounts" do
+  it "should report a balance for the class of plutus_accounts" do
     Equity.should respond_to(:balance)
     Equity.balance.should be_kind_of(BigDecimal)
   end

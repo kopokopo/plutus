@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(:version => 20101203185848) do
 
-  create_table "accounts", :force => true do |t|
+  create_table "plutus_accounts", :force => true do |t|
     t.string   "name"
     t.string   "type"
     t.boolean  "contra"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20101203185848) do
     t.datetime "updated_at"
   end
 
-  add_index "accounts", ["name", "type"], :name => "index_accounts_on_name_and_type"
+  add_index "plutus_accounts", ["name", "type"], :name => "index_accounts_on_name_and_type"
 
   create_table "transactions", :force => true do |t|
     t.string   "description"

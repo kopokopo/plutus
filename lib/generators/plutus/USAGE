@@ -5,7 +5,7 @@ Example:
     rails g plutus
 
     This will create:
-        Create a migration in the application for the "Account" and Transaction" tables.
+        Create a migration in the application for the "PlutusAccount" and Transaction" tables.
         
     Once generated, simply run:
         rake db:migrate

@@ -1,6 +1,6 @@
 class CreatePlutusTables < ActiveRecord::Migration
   def self.up
-    create_table :accounts do |t|
+    create_table :plutus_accounts do |t|
       t.string :name
       t.string :type
       t.boolean :contra
@@ -8,7 +8,7 @@ class CreatePlutusTables < ActiveRecord::Migration
       t.timestamps
     end
     
-		add_index :accounts, [:name, :type]
+		add_index :plutus_accounts, [:name, :type]
    
     create_table :transactions do |t|
       t.string :description
@@ -27,7 +27,7 @@ class CreatePlutusTables < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :accounts
+    drop_table :plutus_accounts
     drop_table :transactions
   end
 end

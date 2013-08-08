@@ -1,12 +1,12 @@
 # The Expense class is an account type used to represents assets or services consumed in the generation of revenue.
 #
 # === Normal Balance
-# The normal balance on Expense accounts is a *Debit*. 
+# The normal balance on Expense plutus_accounts is a *Debit*.
 #
 # @see http://en.wikipedia.org/wiki/Expense Expenses
 #
 # @author Michael Bulat
-class Expense < Account
+class Expense < PlutusAccount
   
   # The credit balance for the account.
   # 
@@ -57,9 +57,9 @@ class Expense < Account
   end  
   
   # This class method is used to return
-  # the balance of all Expense accounts.
+  # the balance of all Expense plutus_accounts.
   #
-  # Contra accounts are automatically subtracted from the balance.
+  # Contra plutus_accounts are automatically subtracted from the balance.
   #
   # @example
   #   >> Expense.balance

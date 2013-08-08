@@ -1,4 +1,4 @@
-# Transactions are the recording of debits and credits to various accounts. 
+# Transactions are the recording of debits and credits to various plutus_accounts.
 # This table can be thought of as a traditional accounting Journal. 
 #
 # Posting to a Ledger can be considered to happen automatically, since 
@@ -19,8 +19,8 @@
 # @author Michael Bulat
 class Transaction < ActiveRecord::Base
   belongs_to :commercial_document, :polymorphic => true
-  belongs_to :credit_account, :class_name => "Account"
-  belongs_to :debit_account, :class_name => "Account"
+  belongs_to :credit_account, :class_name => "PlutusAccount"
+  belongs_to :debit_account, :class_name => "PlutusAccount"
   
   validates_presence_of :credit_account, :debit_account, :amount, :description
   validates_associated :credit_account, :debit_account
