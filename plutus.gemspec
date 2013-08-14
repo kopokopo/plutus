@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{plutus}
-  s.version = "0.5.1"
+  s.name = "plutus"
+  s.version = "0.5.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Bulat"]
-  s.date = %q{2010-12-03}
-  s.description = %q{The plutus plugin provides a complete double entry accounting system for use in any Ruby on Rails application. The plugin follows general Double Entry Bookkeeping practices. All calculations are done using BigDecimal in order to prevent floating point rounding errors. The plugin requires a decimal type on your database as well.}
-  s.email = %q{mbulat@crazydogsoftware.com}
+  s.date = "2013-08-14"
+  s.description = "The plutus plugin provides a complete double entry accounting system for use in any Ruby on Rails application. The plugin follows general Double Entry Bookkeeping practices. All calculations are done using BigDecimal in order to prevent floating point rounding errors. The plugin requires a decimal type on your database as well."
+  s.email = "mbulat@crazydogsoftware.com"
   s.extra_rdoc_files = [
     "LICENSE",
     "README.markdown"
@@ -24,17 +24,21 @@ Gem::Specification.new do |s|
     "VERSION.yml",
     "app/controllers/plutus_accounts_controller.rb",
     "app/controllers/transactions_controller.rb",
-    "app/models/plutus_account.rb",
+    "app/models/amount.rb",
+    "app/models/amounts_extension.rb",
     "app/models/asset.rb",
+    "app/models/credit_amount.rb",
+    "app/models/debit_amount.rb",
     "app/models/equity.rb",
     "app/models/expense.rb",
     "app/models/liability.rb",
+    "app/models/plutus_account.rb",
     "app/models/revenue.rb",
     "app/models/transaction.rb",
-    "app/views/plutus_accounts/index.html.erb",
-    "app/views/plutus_accounts/show.html.erb",
     "app/views/layouts/plutus_accounts.html.erb",
     "app/views/layouts/transactions.html.erb",
+    "app/views/plutus_accounts/index.html.erb",
+    "app/views/plutus_accounts/show.html.erb",
     "app/views/transactions/index.html.erb",
     "app/views/transactions/show.html.erb",
     "config/backtrace_silencers.rb",
@@ -42,8 +46,6 @@ Gem::Specification.new do |s|
     "config/mime_types.rb",
     "config/secret_token.rb",
     "config/session_store.rb",
-    "doc/PlutusAccount.html",
-    "doc/PlutusAccountsController.html",
     "doc/Asset.html",
     "doc/CreatePlutusTables.html",
     "doc/Equity.html",
@@ -51,6 +53,8 @@ Gem::Specification.new do |s|
     "doc/Liability.html",
     "doc/Plutus.html",
     "doc/Plutus/Engine.html",
+    "doc/PlutusAccount.html",
+    "doc/PlutusAccountsController.html",
     "doc/PlutusGenerator.html",
     "doc/Revenue.html",
     "doc/Transaction.html",
@@ -123,13 +127,14 @@ Gem::Specification.new do |s|
     "spec/controllers/plutus_accounts_controller_spec.rb",
     "spec/controllers/transactions_controller_spec.rb",
     "spec/factories/account_factory.rb",
+    "spec/factories/amount_factory.rb",
     "spec/factories/transaction_factory.rb",
     "spec/lib/plutus_spec.rb",
-    "spec/models/plutus_account_spec.rb",
     "spec/models/asset_spec.rb",
     "spec/models/equity_spec.rb",
     "spec/models/expense_spec.rb",
     "spec/models/liability_spec.rb",
+    "spec/models/plutus_account_spec.rb",
     "spec/models/revenue_spec.rb",
     "spec/models/transaction_spec.rb",
     "spec/rcov.opts",
@@ -140,31 +145,12 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb",
     "tasks/plutus_tasks.rake"
   ]
-  s.homepage = %q{http://github.com/mbulat/Plutus}
+  s.homepage = "http://github.com/mbulat/Plutus"
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
-  s.summary = %q{A Plugin providing a Double Entry Accounting Engine for Rails}
-  s.test_files = [
-    "spec/controllers/plutus_accounts_controller_spec.rb",
-    "spec/controllers/transactions_controller_spec.rb",
-    "spec/factories/account_factory.rb",
-    "spec/factories/transaction_factory.rb",
-    "spec/lib/plutus_spec.rb",
-    "spec/models/plutus_account_spec.rb",
-    "spec/models/asset_spec.rb",
-    "spec/models/equity_spec.rb",
-    "spec/models/expense_spec.rb",
-    "spec/models/liability_spec.rb",
-    "spec/models/revenue_spec.rb",
-    "spec/models/transaction_spec.rb",
-    "spec/routing/plutus_accounts_routing_spec.rb",
-    "spec/routing/transactions_routing_spec.rb",
-    "spec/schema.rb",
-    "spec/spec_helper.rb"
-  ]
+  s.rubygems_version = "1.8.10"
+  s.summary = "A Plugin providing a Double Entry Accounting Engine for Rails"
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then

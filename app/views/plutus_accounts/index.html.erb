@@ -12,7 +12,7 @@
 
 <% @accounts.each do |account| %>
   <tr class="<%= cycle("even", "odd") -%>">
-    <td><%=h account.id %></td>
+    <td><%=link_to(account.id, plutus_account_path(account.id)) %></td>
     <td><%=h account.name %></td>
     <td><%=h account.type %></td>
     <td><%=h account.credits_balance %></td>

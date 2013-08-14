@@ -27,3 +27,7 @@ Factory.define :revenue do |account|
   account.name 'factory name'
   account.contra false
 end
+
+sequence :name do |n|
+  "Factory Name #{n}"
+end
