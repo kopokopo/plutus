@@ -51,7 +51,7 @@ class Transaction < ActiveRecord::Base
       transaction.debit_amounts << DebitAmount.new(:plutus_account => a, :amount => debit[:amount], :transaction => transaction)
     end
     hash[:credits].each do |credit|
-      a = Account.find_by_name(credit[:plutus_account])
+      a = PlutusAccount.find_by_name(credit[:plutus_account])
       transaction.credit_amounts << CreditAmount.new(:plutus_account => a, :amount => credit[:amount], :transaction => transaction)
     end
     transaction
