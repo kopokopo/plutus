@@ -28,7 +28,7 @@ class CreatePlutusTables < ActiveRecord::Migration
     end
     add_index :amounts, :type
     add_index :amounts, [:plutus_account_id, :transaction_id]
-    add_index :amounts, [:transaction_id, :account_id]
+    add_index :amounts, [:transaction_id, :plutus_account_id]
   end
 
   def self.down

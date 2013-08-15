@@ -23,8 +23,8 @@ class Transaction < ActiveRecord::Base
   belongs_to :commercial_document, :polymorphic => true
   has_many :credit_amounts, :extend => AmountsExtension
   has_many :debit_amounts, :extend => AmountsExtension
-  has_many :credit_accounts, :through => :credit_amounts, :source => :account
-  has_many :debit_accounts, :through => :debit_amounts, :source => :account
+  has_many :credit_accounts, :through => :credit_amounts, :source => :plutus_account
+  has_many :debit_accounts, :through => :debit_amounts, :source => :plutus_account
 
   validates_presence_of :description
   validate :has_credit_amounts?
@@ -47,12 +47,12 @@ class Transaction < ActiveRecord::Base
   def self.build(hash)
     transaction = Transaction.new(:description => hash[:description], :commercial_document => hash[:commercial_document])
     hash[:debits].each do |debit|
-      a = Account.find_by_name(debit[:account])
-      transaction.debit_amounts << DebitAmount.new(:account => a, :amount => debit[:amount], :transaction => transaction)
+      a = PlutusAccount.find_by_name(debit[:plutus_account])
+      transaction.debit_amounts << DebitAmount.new(:plutus_account => a, :amount => debit[:amount], :transaction => transaction)
     end
     hash[:credits].each do |credit|
-      a = Account.find_by_name(credit[:account])
-      transaction.credit_amounts << CreditAmount.new(:account => a, :amount => credit[:amount], :transaction => transaction)
+      a = Account.find_by_name(credit[:plutus_account])
+      transaction.credit_amounts << CreditAmount.new(:plutus_account => a, :amount => credit[:amount], :transaction => transaction)
     end
     transaction
   end

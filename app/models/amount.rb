@@ -5,10 +5,10 @@
 #
 # @author Michael Bulat
 class Amount < ActiveRecord::Base
-  attr_accessible :account, :amount, :transaction
+  attr_accessible :plutus_account, :amount, :transaction
 
   belongs_to :transaction
-  belongs_to :account
+  belongs_to :plutus_account
 
-  validates_presence_of :type, :amount, :transaction, :account
+  validates_presence_of :type, :amount, :transaction, :plutus_account
 end
