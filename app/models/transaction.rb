@@ -48,11 +48,11 @@ class Transaction < ActiveRecord::Base
     transaction = Transaction.new(:description => hash[:description], :commercial_document => hash[:commercial_document])
     hash[:debits].each do |debit|
       a = PlutusAccount.find_by_name(debit[:plutus_account])
-      transaction.debit_amounts << DebitAmount.new(:plutus_account => a, :amount => debit[:amount], :transaction => transaction)
+      transaction.debit_amounts << DebitAmount.new(:plutus_account => a, :amount => debit[:amount], :transaction => transaction) unless debit[:amount] == 0
     end
     hash[:credits].each do |credit|
       a = PlutusAccount.find_by_name(credit[:plutus_account])
-      transaction.credit_amounts << CreditAmount.new(:plutus_account => a, :amount => credit[:amount], :transaction => transaction)
+      transaction.credit_amounts << CreditAmount.new(:plutus_account => a, :amount => credit[:amount], :transaction => transaction) unless credit[:amount] == 0
     end
     transaction
   end
