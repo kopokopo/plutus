@@ -51,12 +51,16 @@ module Plutus
     def self.build(hash)
       transaction = Transaction.new(:description => hash[:description], :commercial_document => hash[:commercial_document])
       hash[:debits].each do |debit|
-        a = Account.find_by_name(debit[:account])
-        transaction.debit_amounts << DebitAmount.new(:account => a, :amount => debit[:amount], :transaction => transaction)
+        unless debit[:amount] == 0
+          a = Account.find_by_name(debit[:account])
+          transaction.debit_amounts << DebitAmount.new(:account => a, :amount => debit[:amount], :transaction => transaction)
+        end
       end
       hash[:credits].each do |credit|
-        a = Account.find_by_name(credit[:account])
-        transaction.credit_amounts << CreditAmount.new(:account => a, :amount => credit[:amount], :transaction => transaction)
+        unless credit[:amount] == 0
+          a = Account.find_by_name(credit[:account])
+          transaction.credit_amounts << CreditAmount.new(:account => a, :amount => credit[:amount], :transaction => transaction)
+        end
       end
       transaction
     end
