@@ -50,6 +50,11 @@ class PlutusAccount < ActiveRecord::Base
     credit_amounts.balance
   end
 
+  # The credit balance for the account but since a specified time stamp
+  def credits_balance_from_date(query_date)
+    credit_amounts.balance_from_date(query_date)
+  end
+
   # The debit balance for the account.
   #
   # @example
@@ -59,6 +64,11 @@ class PlutusAccount < ActiveRecord::Base
   # @return [BigDecimal] The decimal value credit balance
   def debits_balance
     debit_amounts.balance
+  end
+
+  #The debit balance for the account but from a specified timestamp
+  def debits_balance_from_date(query_date)
+    debit_amounts.balance_from_date(query_date)
   end
 
   # The trial balance of all accounts in the system. This should always equal zero,

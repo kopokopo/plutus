@@ -26,6 +26,15 @@ class Liability < PlutusAccount
     end
   end
 
+  #The balance of the account since a specific date
+  def balance_from_date(query_date)
+    unless contra
+      credits_balance_from_date(query_date) - debits_balance_from_date(query_date)
+    else
+      debits_balance_from_date(query_date) - credits_balance_from_date(query_date)
+    end
+  end
+
   # Balance of all Liability accounts
   #
   # @example

@@ -11,4 +11,8 @@ class Amount < ActiveRecord::Base
   belongs_to :plutus_account
 
   validates_presence_of :type, :amount, :transaction, :plutus_account
+
+  scope :newer_than, lambda {|query_date|
+    where("created_at > '#{query_date.strftime('%Y-%m-%d %H:%M:%S')}'")
+  }
 end
