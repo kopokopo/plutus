@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "plutus"
-  s.version = "0.5.6"
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Bulat"]
-  s.date = "2013-08-16"
+  s.date = "2013-10-13"
   s.description = "The plutus plugin provides a complete double entry accounting system for use in any Ruby on Rails application. The plugin follows general Double Entry Bookkeeping practices. All calculations are done using BigDecimal in order to prevent floating point rounding errors. The plugin requires a decimal type on your database as well."
   s.email = "mbulat@crazydogsoftware.com"
   s.extra_rdoc_files = [
@@ -147,16 +147,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/mbulat/Plutus"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.10"
+  s.rubygems_version = "2.0.3"
   s.summary = "A Plugin providing a Double Entry Accounting Engine for Rails"
-
-  if s.respond_to? :specification_version then
-    s.specification_version = 3
-
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-    else
-    end
-  else
-  end
 end
 
