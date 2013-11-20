@@ -5,7 +5,7 @@
 #
 # @author Michael Bulat
 class Amount < ActiveRecord::Base
-  attr_accessible :plutus_account, :amount, :transaction
+  attr_accessible :plutus_account, :amount, :transaction, :time_period
 
   belongs_to :transaction
   belongs_to :plutus_account
