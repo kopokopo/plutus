@@ -55,6 +55,10 @@ class PlutusAccount < ActiveRecord::Base
     credit_amounts.balance_from_date(query_date)
   end
 
+  def current_credits_balance
+    credit_amounts.current_balance
+  end
+
   # The debit balance for the account.
   #
   # @example
@@ -69,6 +73,10 @@ class PlutusAccount < ActiveRecord::Base
   #The debit balance for the account but from a specified timestamp
   def debits_balance_from_date(query_date)
     debit_amounts.balance_from_date(query_date)
+  end
+
+  def current_debits_balance
+    debit_amounts.current_balance
   end
 
   # The trial balance of all accounts in the system. This should always equal zero,

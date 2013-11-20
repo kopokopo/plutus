@@ -16,7 +16,11 @@ class Amount < ActiveRecord::Base
     where("created_at > '#{query_date.strftime('%Y-%m-%d %H:%M:%S')}'")
   }
 
+  #scope :in_current_quarter, where("created_at >= #{Time.now.beginning_of_quarter.utc.strftime('%Y-%m-%d %H:%M:%S')}")
+
   def self.in_current_quarter
-    Amount.newer_than(Time.now.beginning_of_quarter.utc)
+    current_time = Time.now
+    where(:time_period => "#{current_time.year}-#{((current_time.month - 1) / 3) + 1}" )
   end
+
 end

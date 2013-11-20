@@ -35,6 +35,26 @@ class Asset < PlutusAccount
     end
   end
 
+  # Get the balances only from the beginning of the current quarter
+  # This depends on accounts having been closed out and the balances carried forward
+  # At the beginning of the quarter.
+  #
+  # @example
+  #   If today is Nov 20th 2013 and you call
+  #   >>asset.balance
+  #   The returned balance will be calculated from Oct 1 00:00:00
+  #
+  # @author Dennis Ondeng
+  #
+  def current_balance
+    unless contra
+      current_debits_balance - current_credits_balance
+    else
+      current_credits_balance - current_debits_balance
+    end
+  end
+
+
   # This class method is used to return
   # the balance of all Asset accounts.
   #
@@ -47,8 +67,8 @@ class Asset < PlutusAccount
   # @return [BigDecimal] The decimal value balance
   def self.balance
     accounts_balance = BigDecimal.new('0')
-    accounts = self.find(:all)
-    accounts.each do |asset|
+    #accounts = self.find(:all)
+    self.find_each do |asset|
       unless asset.contra
         accounts_balance += asset.balance
       else

@@ -26,12 +26,32 @@ class Liability < PlutusAccount
     end
   end
 
-  #The balance of the account since a specific date
+  # The balance of the account since a specific date
+  # @author Dennis Ondeng
   def balance_from_date(query_date)
     unless contra
       credits_balance_from_date(query_date) - debits_balance_from_date(query_date)
     else
       debits_balance_from_date(query_date) - credits_balance_from_date(query_date)
+    end
+  end
+
+  # Get the balances only from the beginning of the current quarter
+  # This depends on accounts having been closed out and the balances carried forward
+  # At the beginning of the quarter.
+  #
+  # @example
+  #   If today is Nov 20th 2013 and you call
+  #   >>liability.balance
+  #   The returned balance will be calculated from Oct 1 00:00:00
+  #
+  # @author Dennis Ondeng
+  #
+  def current_balance
+    unless contra
+      current_credits_balance - current_debits_balance
+    else
+      current_debits_balance - current_credits_balance
     end
   end
 
@@ -42,8 +62,8 @@ class Liability < PlutusAccount
   #   => #<BigDecimal:1030fcc98,'0.82875E5',8(20)>
   def self.balance
     accounts_balance = BigDecimal.new('0')
-    accounts = self.find(:all)
-    accounts.each do |liability|
+    #accounts = self.find(:all)
+    self.find_each do |liability|
       unless liability.contra
         accounts_balance += liability.balance
       else
