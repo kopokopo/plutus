@@ -15,4 +15,8 @@ class Amount < ActiveRecord::Base
   scope :newer_than, lambda {|query_date|
     where("created_at > '#{query_date.strftime('%Y-%m-%d %H:%M:%S')}'")
   }
+
+  def self.in_current_quarter
+    Amount.newer_than(Time.now.beginning_of_quarter.utc)
+  end
 end
