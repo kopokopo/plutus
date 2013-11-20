@@ -46,7 +46,11 @@ class Transaction < ActiveRecord::Base
   # @return [Plutus::Transaction] A Transaction with built credit and debit objects ready for saving
   def self.build(hash)
     current_time = Time.now
+    #if a time period designation is not sent in, default to the current quarter
     current_quarter = "#{current_time.year}-#{((current_time.month - 1) / 3) + 1}"
+    if hash[:time_period]
+      current_quarter = hash[:time_period]
+    end
     transaction = Transaction.new(:description => hash[:description], :commercial_document => hash[:commercial_document])
     hash[:debits].each do |debit|
       unless debit[:amount] == 0
