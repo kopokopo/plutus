@@ -55,6 +55,15 @@ class Liability < PlutusAccount
     end
   end
 
+
+  def balance_at_time(query_time)
+    unless contra
+      credits_balance_at_time(query_time) - debits_balance_at_time(query_time)
+    else
+      debits_balance_at_time(query_time) - credits_balance_at_time(query_time)
+    end
+  end
+
   # Balance of all Liability accounts
   #
   # @example

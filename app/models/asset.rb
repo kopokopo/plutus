@@ -54,6 +54,14 @@ class Asset < PlutusAccount
     end
   end
 
+  def balance_at_time(query_time)
+    unless contra
+      debits_balance_at_time(query_time) - credits_balance_at_time(query_time)
+    else
+      credits_balance_at_time(query_time) - debits_balance_at_time(query_time)
+    end
+  end
+
 
   # This class method is used to return
   # the balance of all Asset accounts.
