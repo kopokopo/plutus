@@ -13,12 +13,12 @@ class Amount < ActiveRecord::Base
   validates_presence_of :type, :amount, :transaction, :plutus_account
 
   scope :newer_than, lambda {|query_date|
-    where("created_at > '#{query_date.strftime('%Y-%m-%d %H:%M:%S')}'")
+    where("created_at > '#{query_date.strftime('%Y-%m-%d %H:%M:%S.%6N')}'")
   }
 
 
   def self.older_than(query_time)
-    where("created_at < '#{query_time.strftime('%Y-%m-%d %H:%M:%S')}'")
+    where("created_at < '#{query_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}'")
   end
 
   def self.in_current_quarter
