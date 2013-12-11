@@ -61,5 +61,6 @@ module AmountsExtension
         balance = nil
       end
     end
+    return balance
   end
 end
