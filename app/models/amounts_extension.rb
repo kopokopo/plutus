@@ -39,6 +39,7 @@ module AmountsExtension
   # Returns a sum of the referenced objects, but only since a specific date
   def balance_from_date(query_date)
     balance = BigDecimal.new('0')
+    return balance if query_date.nil?
     newer_than(query_date).find_each do |amount_record|
       if amount_record.amount
         balance += amount_record.amount
@@ -51,7 +52,8 @@ module AmountsExtension
 
   def balance_at_time(query_time)
     balance = BigDecimal.new('0')
-    quarter = where(:time_period => "#{query_time.year}-#{((query_time.month - 1) / 3) + 1}" )
+    return balance if query_time.nil?
+    quarter = "#{query_time.year}-#{((query_time.month - 1) / 3) + 1}"
     in_quarter(quarter).older_than(query_time).find_each do |amount_record|
       if amount_record.amount
         balance += amount_record.amount
