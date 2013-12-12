@@ -48,7 +48,6 @@ class Transaction < ActiveRecord::Base
     current_time = Time.now
     #if a time period designation is not sent in, default to the current quarter
     current_quarter = hash[:time_period].nil? ? "#{current_time.year}-#{((current_time.month - 1) / 3) + 1}" : hash[:time_period]
-
     transaction = Transaction.new(:description => hash[:description], :commercial_document => hash[:commercial_document])
     hash[:debits].each do |debit|
       if debit[:amount] > 0 || hash[:allow_zero]
@@ -60,6 +59,35 @@ class Transaction < ActiveRecord::Base
       if credit[:amount] > 0 || hash[:allow_zero]
         a = PlutusAccount.find_by_name(credit[:plutus_account])
         transaction.credit_amounts << CreditAmount.new(:plutus_account => a, :amount => credit[:amount], :transaction => transaction, :time_period => current_quarter)
+      end
+    end
+    transaction
+  end
+
+  def self.build_carry_transaction
+    current_time = Time.now
+    #if a time period designation is not sent in, default to the current quarter
+    current_quarter = hash[:time_period].nil? ? "#{current_time.year}-#{((current_time.month - 1) / 3) + 1}" : hash[:time_period]
+    override_timestamp = hash[:created_at]
+    transaction = Transaction.new(:description => hash[:description], :commercial_document => hash[:commercial_document])
+    hash[:debits].each do |debit|
+      if debit[:amount] > 0 || hash[:allow_zero]
+        a = PlutusAccount.find_by_name(debit[:plutus_account])
+        if override_timestamp
+          transaction.debit_amounts << DebitAmount.new(:plutus_account => a, :amount => debit[:amount], :transaction => transaction, :time_period => current_quarter, :created_at => override_timestamp)
+        else
+          transaction.debit_amounts << DebitAmount.new(:plutus_account => a, :amount => debit[:amount], :transaction => transaction, :time_period => current_quarter)
+        end
+      end
+    end
+    hash[:credits].each do |credit|
+      if credit[:amount] > 0 || hash[:allow_zero]
+        a = PlutusAccount.find_by_name(credit[:plutus_account])
+        if override_timestamp
+          transaction.credit_amounts << CreditAmount.new(:plutus_account => a, :amount => credit[:amount], :transaction => transaction, :time_period => current_quarter, :created_at => override_timestamp)
+        else
+          transaction.credit_amounts << CreditAmount.new(:plutus_account => a, :amount => credit[:amount], :transaction => transaction, :time_period => current_quarter)
+        end
       end
     end
     transaction
