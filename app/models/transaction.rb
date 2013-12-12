@@ -51,19 +51,21 @@ class Transaction < ActiveRecord::Base
 
     transaction = Transaction.new(:description => hash[:description], :commercial_document => hash[:commercial_document])
     hash[:debits].each do |debit|
-      unless debit[:amount] == 0
+      if debit[:amount] > 0 || hash[:allow_zero]
         a = PlutusAccount.find_by_name(debit[:plutus_account])
         transaction.debit_amounts << DebitAmount.new(:plutus_account => a, :amount => debit[:amount], :transaction => transaction, :time_period => current_quarter)
       end
     end
     hash[:credits].each do |credit|
-      unless credit[:amount] == 0
+      if credit[:amount] > 0 || hash[:allow_zero]
         a = PlutusAccount.find_by_name(credit[:plutus_account])
         transaction.credit_amounts << CreditAmount.new(:plutus_account => a, :amount => credit[:amount], :transaction => transaction, :time_period => current_quarter)
       end
     end
     transaction
   end
+
+
 
   private
   def has_credit_amounts?
