@@ -64,7 +64,7 @@ class Transaction < ActiveRecord::Base
     transaction
   end
 
-  def self.build_carry_transaction
+  def self.build_carry_transaction(hash)
     current_time = Time.now
     #if a time period designation is not sent in, default to the current quarter
     current_quarter = hash[:time_period].nil? ? "#{current_time.year}-#{((current_time.month - 1) / 3) + 1}" : hash[:time_period]
