@@ -24,12 +24,6 @@ module AmountsExtension
     return balance
   end
 
-  def test_balance
-    balance = BigDecimal.new('0')
-    balance += in_current_quarter.sum(:amount)
-    return balance
-  end
-
   # Returns a sum of the referenced objects, but only since a specific date
   def balance_from_date(query_date)
     balance = BigDecimal.new('0')
@@ -38,6 +32,7 @@ module AmountsExtension
     return balance
   end
 
+  # Returns the balance as it is/was at a specific point in time.
   def balance_at_time(query_time)
     balance = BigDecimal.new('0')
     return balance if query_time.nil?
