@@ -7,6 +7,7 @@ class CreatePlutusTables < ActiveRecord::Migration
       t.integer :company_id
       t.integer :external_entity_id
       t.integer :account_id
+      t.string :plutus_account_type
 
       t.timestamps
     end
