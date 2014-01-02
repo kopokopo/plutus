@@ -4,6 +4,9 @@ class CreatePlutusTables < ActiveRecord::Migration
       t.string :name
       t.string :type
       t.boolean :contra
+      t.integer :company_id
+      t.integer :external_entity_id
+      t.integer :account_id
 
       t.timestamps
     end
@@ -25,6 +28,8 @@ class CreatePlutusTables < ActiveRecord::Migration
       t.references :plutus_account
       t.references :transaction
       t.decimal :amount, :precision => 20, :scale => 10
+      t.string :time_period
+      t.integer :account_id
       t.string :time_period
       t.timestamps
     end
