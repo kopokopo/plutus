@@ -29,7 +29,7 @@
 #
 # @author Michael Bulat
 class PlutusAccount < ActiveRecord::Base
-  attr_accessible :name, :contra
+  #attr_accessible :name, :contra
 
   has_many :credit_amounts, :extend => AmountsExtension
   has_many :debit_amounts, :extend => AmountsExtension
