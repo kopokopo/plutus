@@ -119,12 +119,12 @@ class Transaction < ActiveRecord::Base
     errors[:base] << "The credit and debit amounts are not equal" if credit_amounts.balance != debit_amounts.balance
   end
 
-  def amount_params(parameters)
+  def self.amount_params(parameters)
     params = ActionController::Parameters.new(parameters)
     params.permit(:plutus_account, :amount, :transaction, :time_period)
   end
 
-  def transaction_params(parameters)
+  def self.transaction_params(parameters)
     params = ActionController::Parameters.new(parameters)
     params.permit(:description, :commercial_document)
   end
