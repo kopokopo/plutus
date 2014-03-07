@@ -10,7 +10,12 @@ class Amount < ActiveRecord::Base
   belongs_to :transaction
   belongs_to :plutus_account
 
-  validates_presence_of :type, :amount, :transaction, :plutus_account
+  #validates_presence_of :type, :amount, :transaction, :plutus_account
+
+  validates_presence_of :type, :message => "Amount type is needed"
+  validates_presence_of :amount, :message => "amount is needed"
+  validates_presence_of :transaction, :message => "transaction is needed"
+  validates_presence_of :plutus_account, :message => "plutus account is needed"
 
   scope :newer_than, lambda {|query_date|
     where("created_at > '#{query_date.strftime('%Y-%m-%d %H:%M:%S.%6N')}'")
