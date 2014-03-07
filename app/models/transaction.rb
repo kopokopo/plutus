@@ -53,14 +53,14 @@ class Transaction < ActiveRecord::Base
     hash[:debits].each do |debit|
       if debit[:amount] > 0 || hash[:allow_zero]
         a = PlutusAccount.find_by_name(debit[:plutus_account])
-        raw_params = {:plutus_account => a, :amount => debit[:amount], :transaction => transaction, :time_period => current_quarter}
+        raw_params = {:plutus_account_id => a.id, :amount => debit[:amount], :transaction => transaction, :time_period => current_quarter}
         transaction.debit_amounts << DebitAmount.new(amount_params(raw_params))
       end
     end
     hash[:credits].each do |credit|
       if credit[:amount] > 0 || hash[:allow_zero]
         a = PlutusAccount.find_by_name(credit[:plutus_account])
-        raw_params = {:plutus_account => a, :amount => credit[:amount], :transaction => transaction, :time_period => current_quarter}
+        raw_params = {:plutus_account_id => a.id, :amount => credit[:amount], :transaction => transaction, :time_period => current_quarter}
         transaction.credit_amounts << CreditAmount.new(amount_params(raw_params))
       end
     end
@@ -78,12 +78,12 @@ class Transaction < ActiveRecord::Base
       if debit[:amount] > 0 || hash[:allow_zero]
         a = PlutusAccount.find_by_name(debit[:plutus_account])
         if override_timestamp
-          raw_params = {:plutus_account => a, :amount => debit[:amount], :transaction => transaction, :time_period => current_quarter}
+          raw_params = {:plutus_account_id => a.id, :amount => debit[:amount], :transaction => transaction, :time_period => current_quarter}
           amt = DebitAmount.new(amount_params(raw_params))
           amt.created_at = override_timestamp
           transaction.debit_amounts << amt
         else
-          raw_params = {:plutus_account => a, :amount => debit[:amount], :transaction => transaction, :time_period => current_quarter}
+          raw_params = {:plutus_account_id => a.id, :amount => debit[:amount], :transaction => transaction, :time_period => current_quarter}
           transaction.debit_amounts << DebitAmount.new(amount_params(raw_params))
         end
       end
@@ -92,12 +92,12 @@ class Transaction < ActiveRecord::Base
       if credit[:amount] > 0 || hash[:allow_zero]
         a = PlutusAccount.find_by_name(credit[:plutus_account])
         if override_timestamp
-          raw_params = {:plutus_account => a, :amount => credit[:amount], :transaction => transaction, :time_period => current_quarter}
+          raw_params = {:plutus_account_id => a.id, :amount => credit[:amount], :transaction => transaction, :time_period => current_quarter}
           amt = CreditAmount.new(amount_params(raw_params))
           amt.created_at = override_timestamp
           transaction.credit_amounts << amt
         else
-          raw_params = {:plutus_account => a, :amount => credit[:amount], :transaction => transaction, :time_period => current_quarter}
+          raw_params = {:plutus_account_id => a.id, :amount => credit[:amount], :transaction => transaction, :time_period => current_quarter}
           transaction.credit_amounts << CreditAmount.new(amount_params(raw_params))
         end
       end
