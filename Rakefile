@@ -1,3 +1,4 @@
+=begin
 require 'rake'
 require 'yard'
 
@@ -22,3 +23,16 @@ YARD::Rake::YardocTask.new do |t|
   t.files   = ['lib/**/*.rb', 'app/**/*.rb']   # optional
   t.options = [] # optional
 end
+=end
+
+require 'bundler/setup'
+
+require 'rspec/core/rake_task'
+
+desc "run specs"
+RSpec::Core::RakeTask.new do |t|
+  t.rspec_opts = ["-c", "-f d", "-r ./spec/spec_helper.rb"]
+  t.pattern = 'spec/**/*_spec.rb'
+end
+
+task :default  => :spec
