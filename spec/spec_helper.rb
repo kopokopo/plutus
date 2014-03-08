@@ -2,6 +2,7 @@ require 'factory_girl'
 
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path(File.dirname(__FILE__) + "/../fixture_rails_root/config/environment")
+require Rails.root.join('db/schema').to_s
 require 'rspec/rails'
 
 $: << File.expand_path(File.dirname(__FILE__) + '/../lib/')
