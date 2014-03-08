@@ -8,6 +8,7 @@ $: << File.expand_path(File.dirname(__FILE__) + '/../lib/')
 require 'plutus'
 
 Dir[File.expand_path(File.join(File.dirname(__FILE__),'factories','**','*.rb'))].each {|f| require f}
+Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].each {|f| require f}
 
 RSpec.configure do |config|
   config.mock_with :rspec

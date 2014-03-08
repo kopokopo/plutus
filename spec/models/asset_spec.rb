@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+=begin
 describe Asset do
   
   it "should allow creating an asset account" do
@@ -42,5 +43,14 @@ describe Asset do
     contra_asset.balance.should > 0
     Asset.balance.should == 0
   end
-    
+
+end
+=end
+
+
+
+module Plutus
+  describe Asset do
+    it_behaves_like 'a PlutusAccount subtype', kind: :asset, normal_balance: :debit
+  end
 end
