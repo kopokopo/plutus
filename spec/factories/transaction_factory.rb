@@ -1,3 +1,4 @@
+=begin
 Factory.define :transaction do |transaction|
   #transaction.description 'factory description'
   #transaction.credit_account {|credit_account| credit_account.association(:asset)}
@@ -9,6 +10,21 @@ Factory.define :transaction do |transaction|
     transaction_cd.after_build do |t|
       t.credit_amounts << Factory.build(:credit_amount, :transaction => t)
       t.debit_amounts << Factory.build(:debit_amount, :transaction => t)
+    end
+  end
+end
+=end
+
+
+
+FactoryGirl.define do
+  factory :transaction, :class => Transaction do |transaction|
+    transaction.description 'factory description'
+    factory :transaction_with_credit_and_debit, :class => Transaction do |transaction_cd|
+      transaction_cd.after_build do |t|
+        t.credit_amounts << FactoryGirl.build(:credit_amount, :transaction => t)
+        t.debit_amounts << FactoryGirl.build(:debit_amount, :transaction => t)
+      end
     end
   end
 end

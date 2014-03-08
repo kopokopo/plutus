@@ -10,6 +10,6 @@ require 'plutus'
 Dir[File.expand_path(File.join(File.dirname(__FILE__),'factories','**','*.rb'))].each {|f| require f}
 
 RSpec.configure do |config|
-  config.mock_with :mocha
+  config.mock_with :rspec
   config.use_transactional_fixtures = true
 end
