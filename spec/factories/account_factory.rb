@@ -36,7 +36,7 @@ end
 
 
 FactoryGirl.define do
-  factory :account, :class => PlutusAccount do |account|
+  factory :plutus_account, :class => PlutusAccount do |account|
     account.name
     account.contra false
   end
