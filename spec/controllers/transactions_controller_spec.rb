@@ -5,12 +5,13 @@ describe TransactionsController do
   def mock_transaction(stubs={})
     @mock_transaction ||= mock_model(Transaction, stubs)
   end
-  
+
   describe "GET index" do
     it "assigns all transactions as @transactions" do
-      Transaction.stub(:find).with(:all).and_return([mock_transaction])
+      trans = FactoryGirl.build(:transaction_with_credit_and_debit)
+      trans.save!
       get :index
-      assigns[:transactions].should == [mock_transaction]
+      assigns(:transactions).should == [trans]
     end
   end
   

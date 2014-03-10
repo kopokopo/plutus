@@ -5,12 +5,12 @@ describe PlutusAccountsController do
   def mock_account(stubs={})
     @mock_account ||= mock_model(PlutusAccount, stubs)
   end
-  
+
   describe "GET index" do
     it "assigns all plutus_accounts as @plutus_accounts" do
-      PlutusAccount.stub(:find).with(:all).and_return([mock_account])
+      ac = FactoryGirl.create(:liability)
       get :index
-      assigns[:plutus_accounts].should == [mock_account]
+      assigns(:plutus_accounts).should == [ac]
     end
   end
 
@@ -21,5 +21,4 @@ describe PlutusAccountsController do
       assigns[:plutus_account].should equal(mock_account)
     end
   end
-
 end
