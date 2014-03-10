@@ -18,7 +18,7 @@ describe PlutusAccountsController do
     it "assigns the requested account as @account" do
       PlutusAccount.stub(:find).with("37").and_return(mock_account)
       get :show, :id => "37"
-      assigns[:account].should equal(mock_account)
+      assigns[:plutus_account].should equal(mock_account)
     end
   end
 

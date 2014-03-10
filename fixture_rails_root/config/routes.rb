@@ -1,4 +1,9 @@
 FixtureRailsRoot::Application.routes.draw do
+  root :to => "accounts#index"
+
+  resources :plutus_accounts, :only => [:index, :show]
+  resources :transactions, :only => [:index, :show]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
