@@ -101,7 +101,7 @@ module Plutus
       transaction.credit_amounts << FactoryGirl.build(:credit_amount, :amount => 300, :transaction => transaction)
       puts "Transaction credits: #{transaction.credit_amounts}"
       transaction.debit_amounts << FactoryGirl.build(:debit_amount, :amount => 200, :transaction => transaction)
-      puts "Credits balance: #{transaction.credit_amounts.balance}"
+      puts "Credits balance: #{transaction.credit_amounts.balance} Old balance #{transaction.credit_amounts.old_balance}"
       puts "Debits balance: #{transaction.debit_amounts.balance}"
       transaction.should_not be_valid
       transaction.errors['base'].should == ["The credit and debit amounts are not equal"]

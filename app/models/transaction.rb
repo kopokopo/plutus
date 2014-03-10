@@ -122,7 +122,7 @@ class Transaction < ActiveRecord::Base
 
   def self.amount_params(parameters)
     params = ActionController::Parameters.new(parameters)
-    params.permit(:plutus_account, :amount, :transaction, :time_period)
+    params.permit(:plutus_account_id, :amount, :transaction, :time_period)
   end
 
   def self.transaction_params(parameters)

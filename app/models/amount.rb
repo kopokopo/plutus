@@ -7,7 +7,7 @@ require 'strong_parameters'
 # @author Michael Bulat
 class Amount < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
-  #attr_accessible :plutus_account, :amount, :transaction, :time_period
+  attr_accessible :plutus_account, :amount, :transaction, :time_period
 
   belongs_to :transaction
   belongs_to :plutus_account
