@@ -97,12 +97,9 @@ module Plutus
 
     it "should require the debit and credit amounts to cancel" do
       transaction = FactoryGirl.build(:transaction)
-      #amt1 = FactoryGirl.build(:credit_amount, :amount => 100, :transaction => transaction)
       transaction.credit_amounts << FactoryGirl.build(:credit_amount, :amount => 300, :transaction => transaction)
-      puts "Transaction credits: #{transaction.credit_amounts}"
       transaction.debit_amounts << FactoryGirl.build(:debit_amount, :amount => 200, :transaction => transaction)
-      puts "Credits balance: #{transaction.credit_amounts.balance} Old balance #{transaction.credit_amounts.old_balance}"
-      puts "Debits balance: #{transaction.debit_amounts.balance}"
+      transaction.save!
       transaction.should_not be_valid
       transaction.errors['base'].should == ["The credit and debit amounts are not equal"]
     end
@@ -111,6 +108,7 @@ module Plutus
       transaction = FactoryGirl.build(:transaction)
       transaction.credit_amounts << FactoryGirl.build(:credit_amount, :amount => 100.1, :transaction => transaction)
       transaction.debit_amounts << FactoryGirl.build(:debit_amount, :amount => 100.2, :transaction => transaction)
+      transaction.save!
       transaction.should_not be_valid
       transaction.errors['base'].should == ["The credit and debit amounts are not equal"]
     end
@@ -132,10 +130,10 @@ module Plutus
         description: "Sold some widgets",
         commercial_document: mock_document,
         debits: [
-          {account: "Accounts Receivable", amount: 50}],
+          {plutus_account: "Accounts Receivable", amount: 50}],
         credits: [
-          {account: "Sales Revenue", amount: 45},
-          {account: "Sales Tax Payable", amount: 5}])
+          {plutus_account: "Sales Revenue", amount: 45},
+          {plutus_account: "Sales Tax Payable", amount: 5}])
       transaction.save!
 
       saved_transaction = Transaction.find(transaction.id)

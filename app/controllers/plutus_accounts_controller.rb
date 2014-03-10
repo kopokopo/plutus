@@ -17,12 +17,12 @@ class PlutusAccountsController < ApplicationController
   #   GET /plutus_accounts.xml
   #   GET /plutus_accounts.json
   def index
-    @accounts = PlutusAccount.all
+    @plutus_accounts = PlutusAccount.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @accounts }
-      format.json  { render :json => @accounts }
+      format.xml  { render :xml => @plutus_accounts }
+      format.json  { render :json => @plutus_accounts }
     end
   end
   
@@ -31,12 +31,12 @@ class PlutusAccountsController < ApplicationController
   #   GET /plutus_accounts/1.xml
   #   GET /plutus_accounts/1.json
   def show
-    @account = PlutusAccount.find(params[:id])
+    @plutus_account = PlutusAccount.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @account }
-      format.json  { render :json => @account }
+      format.xml  { render :xml => @plutus_account }
+      format.json  { render :json => @plutus_account }
     end
   end  
   

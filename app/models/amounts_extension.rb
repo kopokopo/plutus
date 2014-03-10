@@ -1,14 +1,13 @@
 # Association extension for has_many :amounts relations. Internal.
 module AmountsExtension
   # Returns a sum of the referenced Amount objects.
-  def old_balance
+  def balance
     balance = BigDecimal.new('0')
     balance += sum(:amount)
-    puts "balance #{balance}"
     return balance
   end
 
-  def balance
+  def old_balance
     balance = BigDecimal.new('0')
     each do |amount_record|
       if amount_record.amount
