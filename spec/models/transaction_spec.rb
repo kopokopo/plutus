@@ -96,8 +96,13 @@ module Plutus
     end
 
     it "should require the debit and credit amounts to cancel" do
-      transaction.credit_amounts << FactoryGirl.build(:credit_amount, :amount => 100, :transaction => transaction)
+      transaction = FactoryGirl.build(:transaction)
+      #amt1 = FactoryGirl.build(:credit_amount, :amount => 100, :transaction => transaction)
+      transaction.credit_amounts << FactoryGirl.build(:credit_amount, :amount => 300, :transaction => transaction)
+      puts "Transaction credits: #{transaction.credit_amounts}"
       transaction.debit_amounts << FactoryGirl.build(:debit_amount, :amount => 200, :transaction => transaction)
+      puts "Credits balance: #{transaction.credit_amounts.balance}"
+      puts "Debits balance: #{transaction.debit_amounts.balance}"
       transaction.should_not be_valid
       transaction.errors['base'].should == ["The credit and debit amounts are not equal"]
     end

@@ -4,6 +4,7 @@ module AmountsExtension
   def balance
     balance = BigDecimal.new('0')
     balance += sum(:amount)
+    puts "balance #{balance}"
     return balance
   end
 

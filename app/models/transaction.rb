@@ -18,6 +18,7 @@
 # 
 # @author Michael Bulat
 class Transaction < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   #attr_accessible :description, :commercial_document
 
   belongs_to :commercial_document, :polymorphic => true
@@ -116,7 +117,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def amounts_cancel?
-    errors[:base] << "The credit and debit amounts are not equal" if credit_amounts.balance != debit_amounts.balance
+    errors[:base] << "The credit and debit amounts are not equal" if self.credit_amounts.balance != self.debit_amounts.balance
   end
 
   def self.amount_params(parameters)
