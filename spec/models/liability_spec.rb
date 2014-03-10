@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+=begin
 describe Liability do
   
   it "should allow creating a liability account" do
@@ -43,4 +44,11 @@ describe Liability do
     Liability.balance.should == 0
   end  
 
+end
+=end
+
+module Plutus
+  describe Liability do
+    it_behaves_like 'a PlutusAccount subtype', kind: :liability, normal_balance: :credit
+  end
 end

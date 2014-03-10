@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+=begin
 describe Revenue do
   
   it "should allow creating a revenue account" do
@@ -43,4 +44,12 @@ describe Revenue do
     Revenue.balance.should == 0
   end  
 
+end
+
+=end
+
+module Plutus
+  describe Revenue do
+    it_behaves_like 'a PlutusAccount subtype', kind: :revenue, normal_balance: :credit
+  end
 end

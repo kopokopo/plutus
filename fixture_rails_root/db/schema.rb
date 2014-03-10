@@ -10,23 +10,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101203185848) do
+ActiveRecord::Schema.define(:version => 20140310041921) do
+
+  create_table "amounts", :force => true do |t|
+    t.string   "type"
+    t.integer  "plutus_account_id"
+    t.integer  "transaction_id"
+    t.decimal  "amount",            :precision => 20, :scale => 10
+    t.string   "time_period"
+    t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "amounts", ["plutus_account_id", "transaction_id"], :name => "index_amounts_on_plutus_account_id_and_transaction_id"
+  add_index "amounts", ["transaction_id", "plutus_account_id"], :name => "index_amounts_on_transaction_id_and_plutus_account_id"
+  add_index "amounts", ["type"], :name => "index_amounts_on_type"
 
   create_table "plutus_accounts", :force => true do |t|
     t.string   "name"
     t.string   "type"
     t.boolean  "contra"
+    t.integer  "company_id"
+    t.integer  "external_entity_id"
+    t.integer  "account_id"
+    t.string   "plutus_account_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "plutus_accounts", ["name", "type"], :name => "index_accounts_on_name_and_type"
+  add_index "plutus_accounts", ["name", "type"], :name => "index_plutus_accounts_on_name_and_type"
 
   create_table "transactions", :force => true do |t|
     t.string   "description"
-    t.integer  "credit_account_id"
-    t.integer  "debit_account_id"
-    t.decimal  "amount",                   :precision => 20, :scale => 10
     t.integer  "commercial_document_id"
     t.string   "commercial_document_type"
     t.datetime "created_at"
@@ -34,7 +50,5 @@ ActiveRecord::Schema.define(:version => 20101203185848) do
   end
 
   add_index "transactions", ["commercial_document_id", "commercial_document_type"], :name => "index_transactions_on_commercial_doc"
-  add_index "transactions", ["credit_account_id"], :name => "index_transactions_on_credit_account_id"
-  add_index "transactions", ["debit_account_id"], :name => "index_transactions_on_debit_account_id"
 
 end

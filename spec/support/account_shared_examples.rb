@@ -1,10 +1,10 @@
 shared_examples_for 'a PlutusAccount subtype' do |elements|
   let(:contra) { false }
-  let(:account) { FactoryGirl.create(elements[:kind], contra: contra)}
-  subject { account }
+  let(:plutus_account) { FactoryGirl.create(elements[:kind], contra: contra)}
+  subject { plutus_account }
 
   describe "class methods" do
-    subject { account.class }
+    subject { plutus_account.class }
     its(:balance) { should be_kind_of(BigDecimal) }
     describe "trial_balance" do
       it "should raise NoMethodError" do
@@ -21,8 +21,8 @@ shared_examples_for 'a PlutusAccount subtype' do |elements|
   end
 
   it "requires a name" do
-    account.name = nil
-    account.should_not be_valid
+    plutus_account.name = nil
+    plutus_account.should_not be_valid
   end
 
   # Figure out which way credits and debits should apply
@@ -35,7 +35,7 @@ shared_examples_for 'a PlutusAccount subtype' do |elements|
   end
 
   describe "when given a debit" do
-    before { FactoryGirl.create(:debit_amount, account: account) }
+    before { FactoryGirl.create(:debit_amount, plutus_account: plutus_account) }
     its(:balance) { should be.send(debit_condition, 0) }
 
     describe "on a contra account" do
@@ -45,7 +45,7 @@ shared_examples_for 'a PlutusAccount subtype' do |elements|
   end
 
   describe "when given a credit" do
-    before { FactoryGirl.create(:credit_amount, account: account) }
+    before { FactoryGirl.create(:credit_amount, plutus_account: plutus_account) }
     its(:balance) { should be.send(credit_condition, 0) }
 
     describe "on a contra account" do

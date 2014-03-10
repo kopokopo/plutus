@@ -1,4 +1,5 @@
 require 'spec_helper'
+=begin
 
 describe Expense do
   
@@ -43,4 +44,12 @@ describe Expense do
     Expense.balance.should == 0
   end  
 
+end
+=end
+
+
+module Plutus
+  describe Expense do
+    it_behaves_like 'a PlutusAccount subtype', kind: :expense, normal_balance: :debit
+  end
 end

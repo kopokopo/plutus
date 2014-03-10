@@ -1,4 +1,5 @@
 require 'spec_helper'
+=begin
 
 describe Equity do
   
@@ -41,6 +42,14 @@ describe Equity do
     transaction = Factory(:transaction, :credit_account => equity, :debit_account => contra_equity, :amount => 1000)
     contra_equity.balance.should > 0
     Equity.balance.should == 0
-  end  
+  end
 
+
+end
+=end
+
+module Plutus
+  describe Equity do
+    it_behaves_like 'a PlutusAccount subtype', kind: :equity, normal_balance: :credit
+  end
 end
