@@ -1,4 +1,5 @@
 =begin
+
 require 'rake'
 require 'yard'
 
@@ -25,6 +26,7 @@ YARD::Rake::YardocTask.new do |t|
 end
 =end
 
+require 'rake'
 require 'bundler/setup'
 
 require 'rspec/core/rake_task'
