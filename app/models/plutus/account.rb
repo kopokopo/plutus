@@ -30,12 +30,10 @@ module Plutus
   #
   # @author Michael Bulat
   class Account < ActiveRecord::Base
-    attr_accessible :name, :contra
-    
-    has_many :credit_amounts, :extend => AmountsExtension
-    has_many :debit_amounts, :extend => AmountsExtension
-    has_many :credit_transactions, :through => :credit_amounts, :source => :transaction
-    has_many :debit_transactions, :through => :debit_amounts, :source => :transaction
+    has_many :credit_amounts, :extend => AmountsExtension, :class_name => 'Plutus::CreditAmount'
+    has_many :debit_amounts, :extend => AmountsExtension, :class_name => 'Plutus::DebitAmount'
+    has_many :credit_entries, :through => :credit_amounts, :source => :entry, :class_name => 'Plutus::Entry'
+    has_many :debit_entries, :through => :debit_amounts, :source => :entry, :class_name => 'Plutus::Entry'
 
     validates_presence_of :type, :name
     validates_uniqueness_of :name

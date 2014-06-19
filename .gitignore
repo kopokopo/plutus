@@ -5,3 +5,16 @@ spec/debug.log
 pkg/
 .idea/
 fixture_rails_root/.idea/
+pkg/
+
+## Documentation cache and generated files:
+/.yardoc/
+/_yardoc/
+/doc/
+/rdoc/
+
+.ruby-version
+.rvmrc
+.ruby-gemset
+Gemfile.lock
+*.gem

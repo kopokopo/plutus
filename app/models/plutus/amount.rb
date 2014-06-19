@@ -6,11 +6,9 @@ module Plutus
   #
   # @author Michael Bulat
   class Amount < ActiveRecord::Base
-    attr_accessible :account, :amount, :transaction
-    
-    belongs_to :transaction
-    belongs_to :account
+    belongs_to :entry, :class_name => 'Plutus::Entry'
+    belongs_to :account, :class_name => 'Plutus::Account'
 
-    validates_presence_of :type, :amount, :transaction, :account
+    validates_presence_of :type, :amount, :entry, :account
   end
 end

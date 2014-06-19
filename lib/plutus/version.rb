@@ -1,3 +1,3 @@
 module Plutus
-  VERSION = "0.7.4"
+  VERSION = "0.9.0"
 end
