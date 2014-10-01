@@ -31,7 +31,6 @@ class CreatePlutusTables < ActiveRecord::Migration
       t.decimal :amount, :precision => 20, :scale => 10
       t.string :time_period
       t.integer :account_id
-      t.string :time_period
       t.timestamps
     end
     add_index :amounts, :type

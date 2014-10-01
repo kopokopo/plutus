@@ -62,6 +62,14 @@ class Revenue < PlutusAccount
     end
   end
 
+  def balance_at_time_no_carry(query_time)
+    unless contra
+      credits_balance_at_time_no_carry(query_time) - debits_balance_at_time_no_carry(query_time)
+    else
+      debits_balance_at_time_no_carry(query_time) - credits_balance_at_time_no_carry(query_time)
+    end
+  end
+
   # This class method is used to return
   # the balance of all Revenue accounts.
   #

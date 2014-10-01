@@ -63,6 +63,14 @@ class PlutusAccount < ActiveRecord::Base
     debit_amounts.balance_at_time(query_time)
   end
 
+  def credits_balance_at_time_no_carry(query_time)
+    credit_amounts.balance_at_time_no_carry(query_time)
+  end
+
+  def debits_balance_at_time_no_carry(query_time)
+    debit_amounts.balance_at_time_no_carry(query_time)
+  end
+
   def current_credits_balance
     credit_amounts.current_balance
   end

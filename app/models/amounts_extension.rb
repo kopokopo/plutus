@@ -52,4 +52,13 @@ module AmountsExtension
     balance += in_quarter(quarter).older_than(query_time).sum(:amount)
     return balance
   end
+
+  # Returns the balance as it is/was at a specific point in time.
+  # But does take into consideration time periods
+  def balance_at_time_no_carry(query_time)
+    balance = BigDecimal('0')
+    return balance if query_time.nil?
+    balance += older_than(query_time).sum(:amount)
+    return balance
+  end
 end

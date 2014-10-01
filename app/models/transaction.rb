@@ -93,7 +93,7 @@ class Transaction < ActiveRecord::Base
       if credit[:amount] > 0 || hash[:allow_zero]
         a = PlutusAccount.find_by_name(credit[:plutus_account])
         if override_timestamp
-          raw_params = {:plutus_account => a, :amount => credit[:amount], :transaction => transaction, :time_period => current_quarter}
+          raw_params = {:plutus_account => a, :amount  => credit[:amount], :transaction => transaction, :time_period => current_quarter}
           amt = CreditAmount.new(amount_params(raw_params))
           amt.created_at = override_timestamp
           transaction.credit_amounts << amt
