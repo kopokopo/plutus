@@ -95,16 +95,19 @@ class Revenue < PlutusAccount
 
 
   def self.balance_by_account_type(account_type)
+    bal = BigDecimal('0')
     result = self.find_by_sql(
         " SELECT
           (SUM(CASE WHEN amts.type = 'CreditAmount' THEN amts.amount ELSE 0 END)
           - SUM(CASE WHEN amts.type = 'DebitAmount' THEN amts.amount ELSE 0 END)) total_balance
         FROM amounts amts INNER JOIN plutus_accounts pa ON pa.id = amts.plutus_account_id
         WHERE pa.plutus_account_type = '#{account_type}'")
-    result.first.try(:total_balance)
+    bal = BigDecimal(result.first.try(:total_balance)) if result.first
+    bal
   end
 
   def self.balance_at_time_by_account_type(account_type, query_time)
+    bal = BigDecimal('0')
     result = self.find_by_sql(
         " SELECT
           (SUM(CASE WHEN amts.type = 'CreditAmount' THEN amts.amount ELSE 0 END)
@@ -113,5 +116,7 @@ class Revenue < PlutusAccount
         WHERE pa.plutus_account_type = '#{account_type}'
           AND amts.created_at < '#{query_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}' ")
     result.first.try(:total_balance)
+    bal = BigDecimal(result.first.try(:total_balance)) if result.first
+    bal
   end
 end
