@@ -102,7 +102,7 @@ class Expense < PlutusAccount
         FROM amounts amts INNER JOIN plutus_accounts pa ON pa.id = amts.plutus_account_id
         WHERE pa.plutus_account_type = '#{account_type}'")
     result.first.try(:total_balance)
-    bal = BigDecimal(result.first.try(:total_balance)) if result.first
+    bal = BigDecimal(result.first.try(:total_balance)) if result.first.try(:total_balance)
     bal
   end
 
@@ -116,7 +116,7 @@ class Expense < PlutusAccount
         WHERE pa.plutus_account_type = '#{account_type}'
           AND amts.created_at < '#{query_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}' ")
     result.first.try(:total_balance)
-    bal = BigDecimal(result.first.try(:total_balance)) if result.first
+    bal = BigDecimal(result.first.try(:total_balance)) if result.first.try(:total_balance)
     bal
   end
 
