@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    plutus (0.7.9)
+    plutus (0.7.10)
       plutus
 
 GEM
