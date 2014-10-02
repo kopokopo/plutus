@@ -92,4 +92,26 @@ class Revenue < PlutusAccount
     end
     accounts_balance
   end
+
+
+  def self.balance_by_account_type(account_type)
+    result = self.find_by_sql(
+        " SELECT
+          (SUM(CASE WHEN amts.type = 'CreditAmount' THEN amts.amount ELSE 0 END)
+          - SUM(CASE WHEN amts.type = 'DebitAmount' THEN amts.amount ELSE 0 END)) balance
+        FROM amounts amts INNER JOIN plutus_accounts pa ON pa.id = amts.plutus_account_id
+        WHERE pa.plutus_account_type = '#{account_type}'")
+    result.balance
+  end
+
+  def self.balance_at_time_by_account_type(account_type, query_time)
+    result = self.find_by_sql(
+        " SELECT
+          (SUM(CASE WHEN amts.type = 'CreditAmount' THEN amts.amount ELSE 0 END)
+          - SUM(CASE WHEN amts.type = 'DebitAmount' THEN amts.amount ELSE 0 END)) balance
+        FROM amounts amts INNER JOIN plutus_accounts pa ON pa.id = amts.plutus_account_id
+        WHERE pa.plutus_account_type = '#{account_type}'
+          AND amts.created_at < '#{query_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}' ")
+    result.balance
+  end
 end

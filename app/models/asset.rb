@@ -8,6 +8,11 @@
 # @author Michael Bulat
 class Asset < PlutusAccount
 
+  scope :of_plutus_account_type, lambda {|account_type|
+    where(:plutus_account_type => account_type)
+  }
+
+
   # The balance of the account.
   #
   # Assets have normal debit balances, so the credits are subtracted from the debits
@@ -93,4 +98,40 @@ class Asset < PlutusAccount
     end
     accounts_balance
   end
+
+  def self.balance_by_account_type(account_type)
+    accounts_balance = BigDecimal('0')
+    self.of_plutus_account_type(account_type).find_each do |asset|
+      unless asset.contra
+        accounts_balance += asset.balance
+      else
+        accounts_balance -= asset.balance
+      end
+    end
+    accounts_balance
+  end
+
+
+  def self.balance_by_account_type(account_type)
+    result = self.find_by_sql(
+        " SELECT
+          (SUM(CASE WHEN amts.type = 'DebitAmount' THEN amts.amount ELSE 0 END)
+          - SUM(CASE WHEN amts.type = 'CreditAmount' THEN amts.amount ELSE 0 END)) balance
+        FROM amounts amts INNER JOIN plutus_accounts pa ON pa.id = amts.plutus_account_id
+        WHERE pa.plutus_account_type = '#{account_type}'")
+    result.balance
+  end
+
+  def self.balance_at_time_by_account_type(account_type, query_time)
+    result = self.find_by_sql(
+        " SELECT
+          (SUM(CASE WHEN amts.type = 'DebitAmount' THEN amts.amount ELSE 0 END)
+          - SUM(CASE WHEN amts.type = 'CreditAmount' THEN amts.amount ELSE 0 END)) balance
+        FROM amounts amts INNER JOIN plutus_accounts pa ON pa.id = amts.plutus_account_id
+        WHERE pa.plutus_account_type = '#{account_type}'
+          AND amts.created_at < '#{query_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}' ")
+    result.balance
+  end
+
+
 end
