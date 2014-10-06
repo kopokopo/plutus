@@ -70,6 +70,14 @@ class Expense < PlutusAccount
     end
   end
 
+  def amount_between_times(from_time, to_time)
+    unless contra
+      debits_balance_between_times(from_time, to_time) - credits_balance_between_times(from_time, to_time)
+    else
+      credits_balance_between_times(from_time, to_time) - debits_balance_between_times(from_time, to_time)
+    end
+  end
+
   # This class method is used to return
   # the balance of all Expense accounts.
   #
@@ -115,6 +123,21 @@ class Expense < PlutusAccount
         FROM amounts amts INNER JOIN plutus_accounts pa ON pa.id = amts.plutus_account_id
         WHERE pa.plutus_account_type = '#{account_type}'
           AND amts.created_at < '#{query_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}' ")
+    result.first.try(:total_balance)
+    bal = BigDecimal(result.first.try(:total_balance)) if result.first.try(:total_balance)
+    bal
+  end
+
+  def self.amount_between_times_by_account_type(account_type, from_time, to_time)
+    bal = BigDecimal('0')
+    result = self.find_by_sql(
+        " SELECT
+          (SUM(CASE WHEN amts.type = 'DebitAmount' THEN amts.amount ELSE 0 END)
+          - SUM(CASE WHEN amts.type = 'CreditAmount' THEN amts.amount ELSE 0 END)) total_balance
+        FROM amounts amts INNER JOIN plutus_accounts pa ON pa.id = amts.plutus_account_id
+        WHERE pa.plutus_account_type = '#{account_type}'
+          AND amts.created_at >= '#{from_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}'
+          AND amts.created_at < '#{to_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}' ")
     result.first.try(:total_balance)
     bal = BigDecimal(result.first.try(:total_balance)) if result.first.try(:total_balance)
     bal

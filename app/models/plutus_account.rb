@@ -75,6 +75,14 @@ class PlutusAccount < ActiveRecord::Base
     credit_amounts.current_balance
   end
 
+  def credits_balance_between_times(from_time, to_time)
+    credit_amounts.amount_between_times(from_time, to_time)
+  end
+
+  def debits_balance_between_times(from_time, to_time)
+    debit_amounts.amount_between_times(from_time, to_time)
+  end
+
   # The debit balance for the account.
   #
   # @example

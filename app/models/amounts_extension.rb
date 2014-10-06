@@ -61,4 +61,11 @@ module AmountsExtension
     balance += older_than(query_time).sum(:amount)
     return balance
   end
+
+  def amount_between_times(from_time, to_time)
+    balance = BigDecimal('0')
+    return balance if (from_time.nil? || to_time.nil?)
+    balance += between_times(from_time, to_time).sum(:amount)
+    return balance
+  end
 end

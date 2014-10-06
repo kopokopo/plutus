@@ -28,6 +28,10 @@ class Amount < ActiveRecord::Base
     where("created_at < '#{query_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}'")
   end
 
+  def self.between_times(from_time, to_time)
+    where("created_at >= '#{from_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}' and created_at < '#{to_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}' ")
+  end
+
   def self.in_current_quarter
     current_time = Time.now
     where(:time_period => "#{current_time.year}-#{((current_time.month - 1) / 3) + 1}" )
