@@ -19,17 +19,17 @@ class Amount < ActiveRecord::Base
   #validates_presence_of :transaction, :message => "transaction is needed"
   #validates_presence_of :plutus_account, :message => "plutus account is needed"
 
-  scope :newer_than, lambda {|query_date|
-    where("created_at > '#{query_date.strftime('%Y-%m-%d %H:%M:%S.%6N')}'")
-  }
 
+  def self.newer_than(query_time)
+    where('amounts.created_at > ?', query_time)
+  end
 
   def self.older_than(query_time)
-    where("created_at < '#{query_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}'")
+    where('amounts.created_at < ?', query_time)
   end
 
   def self.between_times(from_time, to_time)
-    where("created_at >= '#{from_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}' and created_at < '#{to_time.strftime('%Y-%m-%d %H:%M:%S.%6N')}' ")
+    where('amounts.created_at >= ? and amounts.created_at < ?', from_time, to_time)
   end
 
   def self.in_current_quarter
