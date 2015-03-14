@@ -3,3 +3,6 @@ spec/debug.log
 .DS_Store
 .yardoc/
 pkg/
+.bundle
+.idea
+fixture_rails_root/.idea
