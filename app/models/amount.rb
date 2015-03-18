@@ -21,15 +21,15 @@ class Amount < ActiveRecord::Base
 
 
   def self.newer_than(query_time)
-    where('amounts.created_at > ?', query_time)
+    where('amounts.created_at >= ?', query_time)
   end
 
   def self.older_than(query_time)
-    where('amounts.created_at < ?', query_time)
+    where('amounts.created_at <= ?', query_time)
   end
 
   def self.between_times(from_time, to_time)
-    where('amounts.created_at >= ? and amounts.created_at < ?', from_time, to_time)
+    where('amounts.created_at >= ? and amounts.created_at <= ?', from_time, to_time)
   end
 
   def self.in_current_quarter
