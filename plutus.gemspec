@@ -157,7 +157,8 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/mbulat/Plutus"
   s.rubygems_version = "2.2.2"
   s.summary = "A Plugin providing a Double Entry Accounting Engine for Rails"
-
+  s.add_development_dependency 'tzinfo'
+  s.add_dependency('rails', '3.2.17')
   if s.respond_to? :specification_version then
     s.specification_version = 4
 
