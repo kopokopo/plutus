@@ -1,8 +1,7 @@
 PATH
   remote: .
   specs:
-    plutus (0.7.16)
-      plutus
+    plutus (0.7.17)
 
 GEM
   remote: http://rubygems.org/
