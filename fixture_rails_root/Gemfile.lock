@@ -117,3 +117,4 @@ DEPENDENCIES
   sqlite3
   sqlite3-ruby
   strong_parameters
+  tzinfo

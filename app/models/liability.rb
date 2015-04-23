@@ -72,13 +72,33 @@ class Liability < PlutusAccount
     end
   end
 
-  def amount_bewtween_times(from_time, to_time)
+  def balance_between_times(from_time, to_time)
     unless contra
       credits_balance_between_times(from_time, to_time) - debits_balance_between_times(from_time, to_time)
     else
       debits_balance_between_times(from_time, to_time) - credits_balance_between_times(from_time, to_time)
     end
   end
+
+  def balance_between_times_tail_inclusive(from_time, to_time)
+    unless contra
+      credits_balance_between_times_tail_inclusive(from_time, to_time) - debits_balance_between_times_tail_inclusive(from_time, to_time)
+    else
+      debits_balance_between_times_tail_inclusive(from_time, to_time) - credits_balance_between_times_tail_inclusive(from_time, to_time)
+    end
+  end
+
+  def balance_between_times_head_inclusive(from_time, to_time)
+    unless contra
+      credits_balance_between_times_head_inclusive(from_time, to_time) - debits_balance_between_times_head_inclusive(from_time, to_time)
+    else
+      debits_balance_between_times_head_inclusive(from_time, to_time) - credits_balance_between_times_head_inclusive(from_time, to_time)
+    end
+  end
+  
+  
+  
+  
 
   # Balance of all Liability accounts
   #

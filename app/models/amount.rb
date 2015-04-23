@@ -32,6 +32,16 @@ class Amount < ActiveRecord::Base
     where('amounts.created_at >= ? and amounts.created_at <= ?', from_time, to_time)
   end
 
+  def self.between_times_tail_inclusive(from_time, to_time)
+    where('amounts.created_at >= ? and amounts.created_at < ?', from_time, to_time)
+  end
+
+  def self.between_times_head_inclusive(from_time, to_time)
+    where('amounts.created_at > ? and amounts.created_at <= ?', from_time, to_time)
+  end
+
+
+
   def self.in_current_quarter
     current_time = Time.now
     where(:time_period => "#{current_time.year}-#{((current_time.month - 1) / 3) + 1}" )

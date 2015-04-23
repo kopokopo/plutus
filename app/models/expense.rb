@@ -70,13 +70,30 @@ class Expense < PlutusAccount
     end
   end
 
-  def amount_between_times(from_time, to_time)
+  def balance_between_times(from_time, to_time)
     unless contra
       debits_balance_between_times(from_time, to_time) - credits_balance_between_times(from_time, to_time)
     else
       credits_balance_between_times(from_time, to_time) - debits_balance_between_times(from_time, to_time)
     end
   end
+
+  def balance_between_times_tail_inclusive(from_time, to_time)
+    unless contra
+      debits_balance_between_times_tail_inclusive(from_time, to_time) - credits_balance_between_times_tail_inclusive(from_time, to_time)
+    else
+      credits_balance_between_times_tail_inclusive(from_time, to_time) - debits_balance_between_times_tail_inclusive(from_time, to_time)
+    end
+  end
+
+  def balance_between_times_head_inclusive(from_time, to_time)
+    unless contra
+      debits_balance_between_times_head_inclusive(from_time, to_time) - credits_balance_between_times_head_inclusive(from_time, to_time)
+    else
+      credits_balance_between_times_head_inclusive(from_time, to_time) - debits_balance_between_times_head_inclusive(from_time, to_time)
+    end
+  end
+  
 
   # This class method is used to return
   # the balance of all Expense accounts.
