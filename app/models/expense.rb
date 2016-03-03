@@ -5,7 +5,7 @@
 #
 # @see http://en.wikipedia.org/wiki/Expense Expenses
 #
-# @author Michael Bulat
+# @author Michael Bulat, modifications: Dennis Ondeng
 class Expense < PlutusAccount
 
   # The balance of the account.
@@ -159,6 +159,4 @@ class Expense < PlutusAccount
     bal = BigDecimal(result.first.try(:total_balance)) if result.first.try(:total_balance)
     bal
   end
-
-
 end

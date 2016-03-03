@@ -5,7 +5,7 @@
 #
 # @see http://en.wikipedia.org/wiki/Asset Assets
 #
-# @author Michael Bulat
+# @author Michael Bulat, modifications: Dennis Ondeng
 class Asset < PlutusAccount
 
   scope :of_plutus_account_type, lambda {|account_type|
@@ -112,7 +112,6 @@ class Asset < PlutusAccount
   # @return [BigDecimal] The decimal value balance
   def self.balance
     accounts_balance = BigDecimal.new('0')
-    #accounts = self.find(:all)
     self.find_each do |asset|
       unless asset.contra
         accounts_balance += asset.balance
@@ -179,7 +178,4 @@ class Asset < PlutusAccount
     bal = BigDecimal(result.first.try(:total_balance)) if result.first.try(:total_balance)
     bal
   end
-
-
-
 end

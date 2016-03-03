@@ -29,7 +29,6 @@
 #
 # @author Michael Bulat
 class PlutusAccount < ActiveRecord::Base
-  #attr_accessible :name, :contra
 
   has_many :credit_amounts, :extend => AmountsExtension
   has_many :debit_amounts, :extend => AmountsExtension
@@ -84,9 +83,6 @@ class PlutusAccount < ActiveRecord::Base
   end
 
 
-
-
-
   def credits_balance_between_times_tail_inclusive(from_time, to_time)
     credit_amounts.amount_between_times_tail_inclusive(from_time, to_time)
   end
@@ -102,7 +98,6 @@ class PlutusAccount < ActiveRecord::Base
   def debits_balance_between_times_tail_inclusive(from_time, to_time)
     debit_amounts.amount_between_times_tail_inclusive(from_time, to_time)
   end
-
 
 
   # The debit balance for the account.
@@ -140,5 +135,4 @@ class PlutusAccount < ActiveRecord::Base
       Asset.balance - (Liability.balance + Equity.balance + Revenue.balance - Expense.balance)
     end
   end
-
 end

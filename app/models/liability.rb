@@ -5,7 +5,7 @@
 #
 # @see http://en.wikipedia.org/wiki/Liability_(financial_accounting) Liability
 #
-# @author Michael Bulat
+# @author Michael Bulat, modifications: Dennis Ondeng
 class Liability < PlutusAccount
 
   # The balance of the account.

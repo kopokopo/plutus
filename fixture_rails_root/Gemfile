@@ -9,12 +9,14 @@ gem 'sqlite3'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'strong_parameters'
+gem 'plutus', path: '../', branch: 'ownable'
+
 # http://blog.davidchelimsky.net/2010/07/11/rspec-rails-2-generators-and-rake-tasks/
 group :test do
-  gem "rspec-rails", "2.2.1"
-  gem "database_cleaner", "0.5.2"
-  gem "factory_girl",     "1.3.2"
-  gem "mocha"
+  gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'factory_girl', '1.3.2'
+  gem 'mocha'
 end
 # Use unicorn as the web server
 # gem 'unicorn'
