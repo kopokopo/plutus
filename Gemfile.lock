@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    plutus (0.7.18)
+    plutus (0.7.19)
       rails (~> 3.2)
       strong_parameters
 
@@ -116,9 +116,11 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-jdbcsqlite3-adapter
+  bundler (~> 1.10)
   factory_girl_rails (~> 1.1)
   jdbc-sqlite3
   plutus!
+  rake (~> 10.0)
   rspec
   rspec-rails
   sqlite3
