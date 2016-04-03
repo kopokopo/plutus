@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    plutus (0.7.19)
+    plutus (0.7.20)
       rails (~> 3.2)
       strong_parameters
 
