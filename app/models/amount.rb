@@ -42,28 +42,28 @@ class Amount < ActiveRecord::Base
 
 
 
-  #def self.in_current_quarter
-  #  current_time = Time.now
-  #  where(:time_period => "#{current_time.year}-#{((current_time.month - 1) / 3) + 1}" )
-  #end
-
-
-  #Hack!! because carry_forward did not work
   def self.in_current_quarter
-    where(time_period: ['2016-1','2016-2'])
+    current_time = Time.now
+    where(:time_period => "#{current_time.year}-#{((current_time.month - 1) / 3) + 1}" )
   end
+
 
   #Hack!! because carry_forward did not work
-  #def self.in_quarter(quarter)
-  #  where(:time_period => quarter)
+  #def self.in_current_quarter
+  #  where(time_period: ['2016-1','2016-2'])
   #end
 
+  #Hack!! because carry_forward did not work
   def self.in_quarter(quarter)
-    if quarter == '2016-2'
-      where(time_period: ['2016-1','2016-2'])
-    else
-      where(:time_period => quarter)
-    end
+    where(:time_period => quarter)
   end
+
+  #def self.in_quarter(quarter)
+  #  if quarter == '2016-2'
+  #    where(time_period: ['2016-1','2016-2'])
+  #  else
+  #    where(:time_period => quarter)
+  #  end
+  #end
 
 end
