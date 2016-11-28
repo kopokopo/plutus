@@ -1,4 +1,3 @@
-require 'strong_parameters'
 # The Amount class represents debit and credit amounts in the system.
 #
 # @abstract
@@ -6,7 +5,6 @@ require 'strong_parameters'
 #
 # @author Michael Bulat, modifications: Dennis Ondeng
 class Amount < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :transaction
   belongs_to :plutus_account
