@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   end
 
 
-  s.add_dependency('rails', '~> 4.0.0')
+  s.add_dependency('rails', '~> 5.1.4')
 
   s.add_development_dependency('yard')
   s.add_development_dependency 'bundler', '~> 1.10'
