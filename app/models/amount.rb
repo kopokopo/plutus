@@ -6,7 +6,7 @@
 # @author Michael Bulat, modifications: Dennis Ondeng
 class Amount < ActiveRecord::Base
 
-  belongs_to :entry, :foreign_key: 'transaction_id', class_name: 'Transaction'
+  belongs_to :entry, foreign_key: 'transaction_id', class_name: 'Transaction'
   belongs_to :plutus_account
 
   validates_presence_of :type, :amount, :entry, :plutus_account
