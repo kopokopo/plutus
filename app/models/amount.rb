@@ -1,4 +1,3 @@
-require 'strong_parameters'
 # The Amount class represents debit and credit amounts in the system.
 #
 # @abstract
