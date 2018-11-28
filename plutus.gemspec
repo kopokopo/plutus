@@ -25,9 +25,7 @@ Gem::Specification.new do |s|
     raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
   end
 
-
-  s.add_dependency('rails', '~> 5.2.1')
-
+  s.add_dependency('rails', '~> 5.2', '>= 5.2.1')
   s.add_development_dependency('yard')
   s.add_development_dependency 'bundler', '~> 1.10'
   s.add_development_dependency 'rake', '~> 10.0'
