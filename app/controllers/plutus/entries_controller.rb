@@ -11,7 +11,6 @@ module Plutus
   #
   # @author Michael Bulat
   class EntriesController < ApplicationController
-    unloadable
     # @example
     #   GET /entries
     #   GET /entries.xml

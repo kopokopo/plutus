@@ -9,6 +9,7 @@ require "date"
 Gem::Specification.new do |s|
   s.name = %q{plutus}
   s.version = Plutus::VERSION
+  s.licenses    = ['MIT']
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Bulat"]
@@ -19,12 +20,13 @@ Gem::Specification.new do |s|
     "LICENSE",
     "README.markdown"
   ]
-  s.add_dependency("rails", "~> 4.0")
-  s.add_development_dependency("yard")
+  s.add_dependency("rails", ">= 7.2.2", "< 8.0")
+  s.required_ruby_version = ">= 3.3.5"
+  s.add_development_dependency("yard", "~> 0.9.0")
   s.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "Rakefile", "README.markdown"]
-  s.homepage = %q{http://github.com/mbulat/plutus}
+  s.homepage = %q{https://github.com/kopokopo/plutus}
   s.require_paths = ["lib"]
-  s.required_rubygems_version = ">= 1.3.6"
+  s.required_rubygems_version = ">= 3.0"
   s.summary = %q{A Plugin providing a Double Entry Accounting Engine for Rails}
   s.test_files = Dir["{spec}/**/*"]
 

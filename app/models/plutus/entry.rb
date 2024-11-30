@@ -61,15 +61,15 @@ module Plutus
 
     private
       def has_credit_amounts?
-        errors[:base] << "Entry must have at least one credit amount" if self.credit_amounts.blank?
+        errors.add(:base, "Entry must have at least one credit amount") if self.credit_amounts.blank?
       end
 
       def has_debit_amounts?
-        errors[:base] << "Entry must have at least one debit amount" if self.debit_amounts.blank?
+        errors.add(:base, "Entry must have at least one debit amount") if self.debit_amounts.blank?
       end
 
       def amounts_cancel?
-        errors[:base] << "The credit and debit amounts are not equal" if credit_amounts.balance != debit_amounts.balance
+        errors.add(:base, "The credit and debit amounts are not equal") if credit_amounts.balance != debit_amounts.balance
       end
   end
 end

@@ -33,7 +33,7 @@ module Plutus
     #   >> Plutus::Liability.balance
     #   => #<BigDecimal:1030fcc98,'0.82875E5',8(20)>
     def self.balance
-      accounts_balance = BigDecimal.new('0')
+      accounts_balance = BigDecimal('0')
       accounts = self.all
       accounts.each do |liability|
         unless liability.contra

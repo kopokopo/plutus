@@ -3,7 +3,7 @@ module Plutus
   module AmountsExtension
     # Returns a sum of the referenced Amount objects.
     def balance
-      balance = BigDecimal.new('0')
+      balance = BigDecimal('0')
       each do |amount_record|
         if amount_record.amount
           balance += amount_record.amount
