@@ -18,8 +18,8 @@ Gem::Specification.new do |s|
     'LICENSE',
     'README.markdown'
   ]
-  s.add_dependency 'rails', '>= 7.2.2', '<= 8.1.1'
-  s.required_ruby_version = '>= 3.3.5', '<= 3.4.7'
+  s.add_dependency 'rails', '>= 7.2.2', '<= 8.1.4.1'
+  s.required_ruby_version = '>= 3.3.5', '<= 3.4.12'
   s.add_development_dependency('yard', '~> 0.9.0')
   s.files = Dir['{app,config,db,lib}/**/*'] + ['LICENSE', 'Rakefile', 'README.markdown']
   s.homepage = 'https://github.com/kopokopo/plutus'
